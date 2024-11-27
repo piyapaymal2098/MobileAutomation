@@ -2,11 +2,13 @@ package Com.myntra;
 
 import Pages.HomePage;
 import io.appium.java_client.AppiumBy;
+import org.example.utility.ExetndereporterNG;
 import org.openqa.selenium.By;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-
+@Listeners(ExetndereporterNG.class)
 public class MyntraTest extends BaseClass{
     @Test
     public void myntraTest() {

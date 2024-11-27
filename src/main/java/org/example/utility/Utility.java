@@ -1,26 +1,31 @@
 package org.example.utility;
 
+import java.io.File;
 import java.time.Duration;
 
+import io.appium.java_client.AppiumDriver;
+
 import org.example.base.TestBase;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
+import java.io.File;
+import java.nio.file.StandardCopyOption;
 
 import com.google.common.collect.ImmutableMap;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
+
 public class Utility extends TestBase {
 
     public static void scrollToText(String text) {
 
-        driver.findElement(new AppiumBy.ByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\""+text+"\"));"));
+        driver.findElement(new AppiumBy.ByAndroidUIAutomator("new UiScrollable(new UiSelector()).scrollIntoView(text(\"" + text + "\"));"));
     }
 
     public static void swipe(AndroidDriver driver, DIRECTION direction) {
@@ -35,8 +40,8 @@ public class Utility extends TestBase {
                 int endY = (int) (size.getHeight() * 0.8);
 
                 ((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
-                        "startX",startX,
-                        "startY",startY,
+                        "startX", startX,
+                        "startY", startY,
                         "endX", endX,
                         "endY", endY
                 ));
@@ -49,8 +54,8 @@ public class Utility extends TestBase {
                 endY = (int) (size.getHeight() * 0.2);
 
                 ((JavascriptExecutor) driver).executeScript("mobile: dragGesture", ImmutableMap.of(
-                        "startX",startX,
-                        "startY",startY,
+                        "startX", startX,
+                        "startY", startY,
                         "endX", endX,
                         "endY", endY
                 ));
@@ -73,4 +78,18 @@ public class Utility extends TestBase {
                 .until(ExpectedConditions.visibilityOfElementLocated(element));
 
     }
+
+    public void captureScreenShot(AppiumDriver driver, String screenShotName) {
+        try {
+            File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File source = new File(screenshotFile.getAbsolutePath());
+            File destination = new File("/sdcard/Download/screenshot.png");
+            FileUtils.copyFile(source, destination);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 }
