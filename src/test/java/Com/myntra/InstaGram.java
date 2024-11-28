@@ -36,8 +36,12 @@ public class InstaGram {
     }
     @Test
     public void testInstagram() throws IOException, InterruptedException {
-
-        WebElement posttab = driver.findElement(By.xpath("(//android.widget.ImageView[@resource-id=\"com.instagram.android:id/tab_icon\"])[4]"));
+     //   if(){
+        WebElement  = driver.findElement(By.xpath(""));
+        instarecord.click();
+        WebElement  = driver.findElement(By.xpath(""));
+        picandVedio.click();
+        WebElement posttab = driver.findElement(By.xpath(""));
         posttab.click();
 
        /* WebElement userName = driver.findElement(By.className("android.widget.EditText"));
@@ -45,7 +49,8 @@ public class InstaGram {
         WebElement pass  = driver.findElement(By.className("android.view.ViewGroup"));
         pass.sendKeys("Colors@123");
        // driver.findElement(By.xpath("//android.view.View[@content-desc=\"Log in\"]")).click();*/
-        System.out.println(driver.context());
+        //System.out.println(driver.context());
+
         Set<String> webview = driver.getContextHandles();
         driver.switchTo().defaultContent();
 
